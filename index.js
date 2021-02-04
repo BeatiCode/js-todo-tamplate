@@ -13,6 +13,9 @@ const tasksList = [
     { id: "7", text: "получить работу", completed: false }
     ];
 
+
+// Создание вложенности эллементов
+
 function createListItem() {
     const li = document.createElement('li');
     
@@ -23,10 +26,8 @@ function createListItem() {
     const input = document.createElement('input');
     input.className = "toggle";
     input.type = "checkbox";
-    // input.checked = tasksList.completed;
 
-    const label = document.createElement('label');
-    // label.innerHTML =    
+    const label = document.createElement('label');  
 
     const button = document.createElement('button');
     button.className = "destroy";
@@ -39,6 +40,8 @@ function createListItem() {
     return li;
 
 };
+
+// массив задач
 
 function renderTasks() {
 
@@ -66,6 +69,29 @@ function renderTasks() {
         }   
 
 
-}
+};
 
-renderTasks()
+function getid(arr) {
+
+    if(arr.length > 0){
+        return arr[arr.length-1]['id'];
+    } else {
+        return arr;
+    };
+};
+
+function createNewTask() {
+
+    let id = getid(tasksList);
+    id++;
+    const task  = {
+        id: "" + id, 
+        text: "", 
+        completed: false 
+};
+
+        tasksList.push(task);
+        console.log(tasksList);
+
+};
+createNewTask()
