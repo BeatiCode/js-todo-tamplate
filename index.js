@@ -44,25 +44,20 @@ function renderTasks() {
 
     if(tasksList.length > 0) {
         const ul = document.querySelector('.todo-list');
-        let i = 0;
-        while(i < tasksList.length) {
+        for(let i = 0; i < tasksList.length; i++) {
             const li = createListItem();
             ul.append(li);
             li.id = tasksList[i].id;  
-            i++
         }
     }
 
         const input = document.querySelectorAll('.toggle');
         const label = document.querySelectorAll('.todo-list li label');
         console.log(label);
-        
-        let i = 0;
-        while(i < tasksList.length) {
+        for(let i = 0; i < tasksList.length; i++) {
             label[i].innerHTML = tasksList[i].text;
             input[i].checked = tasksList[i].completed;
-            i++
-        
+            
         }   
 
 
