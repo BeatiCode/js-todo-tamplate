@@ -5,12 +5,12 @@ const task = {
 };
 const tasksList = [
     { id: "1", text: "выучить html", completed: true },
-    { id: "2", text: "выучить css", completed: true },
-    { id: "3", text: "выучить js", completed: false },
-    { id: "4", text: "выучить фреймворк", completed: false },
-    { id: "5", text: "написать несколько учебных проектов", completed: false },
-    { id: "6", text: "пройти собеседование", completed: true },
-    { id: "7", text: "получить работу", completed: false }
+    // { id: "2", text: "выучить css", completed: true },
+    // { id: "3", text: "выучить js", completed: false },
+    // { id: "4", text: "выучить фреймворк", completed: false },
+    // { id: "5", text: "написать несколько учебных проектов", completed: false },
+    // { id: "6", text: "пройти собеседование", completed: true },
+    // { id: "7", text: "получить работу", completed: false }
 ];
 // Создание вложенности эллементов
 
