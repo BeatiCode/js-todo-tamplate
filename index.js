@@ -5,11 +5,11 @@ const task = {
 };
 const tasksList = [
     { id: "1", text: "выучить html", completed: true },
-    { id: "2", text: "выучить css", completed: false },
+    { id: "2", text: "выучить css", completed: true },
     { id: "3", text: "выучить js", completed: false },
     { id: "4", text: "выучить фреймворк", completed: false },
     { id: "5", text: "написать несколько учебных проектов", completed: false },
-    { id: "6", text: "пройти собеседование", completed: false },
+    { id: "6", text: "пройти собеседование", completed: true },
     { id: "7", text: "получить работу", completed: false }
 ];
 // Создание вложенности эллементов
@@ -101,12 +101,19 @@ function deleteTask() {
                 };
             };
             li.remove();
+            console.log(tasksList);
         };
     };
 };
 
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
+    for (let i = 0; i < tasksList.length; i++){
+        if(tasksList[i].completed == true) {
+            const li = ul.children[i];
+            li.classList.add('completed');
+        };
+    };
     ul.onclick = function (event) {
         if(event.target.type != "checkbox") return;
             let li = event.target.closest('li');
@@ -120,23 +127,16 @@ function toggleTask() {
                     li.classList.add('completed');
                     task.completed = true;
                     console.log(liId);
-                    console.log(task.completed);
-                    console.log(tasksList);
                 }  else {
                     li.classList.remove('completed');
                     task.completed = false;
-                    console.log(task.completed);
-                    console.log(tasksList);
-                }
-            }
 
-            // console.log(check);
-            // console.log(tasksList);
-
+                };
+            };
     };
 };
 
 renderTasks()
 toggleTask()
-deleteTask()
+
 
