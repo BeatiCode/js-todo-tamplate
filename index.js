@@ -130,7 +130,6 @@ function toggleTask() {
                 }  else {
                     li.classList.remove('completed');
                     task.completed = false;
-
                 };
             };
     };
