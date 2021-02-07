@@ -94,11 +94,6 @@ function deleteTask() {
         if (!li) return;
         let task = tasksList.find(item => item.id == liId);
         tasksList = tasksList.filter(t => t.id !== task.id);
-        // for (let i = 0; i < tasksList.length; i++) {
-        //     if (task.id == tasksList[i].id) {
-        //         tasksList.splice(i, 1);
-        //     };
-        // };
         li.remove();
     };
 };
