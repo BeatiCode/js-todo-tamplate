@@ -89,22 +89,12 @@ function deleteTask() {
     const ul = document.querySelector('.todo-list');
     ul.onclick = function (event) {
         if (event.target.className != "destroy") return;
-        let li = event.target.closest('li');
-        let liId = li.id;
-        if (!li) {
-            return;
-        } else {
-            let task = tasksList.find(item => item.id == liId);
-            for (let i = 0; i < tasksList.length; i++) {
-                if (task.id == tasksList[i].id) {
-                    tasksList.splice(i, 1);
-                };
-            };
-            li.remove();
-            console.log(tasksList);
-        };
-    };
-};
+        const li = event.target.closest('li');
+        const liId = li.id;
+        if (!li) return;
+        let task = tasksList.find(item => item.id == liId);
+        tasksList = tasksList.filter(t => t.id !== task.id);
+        li.remove();
 
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
