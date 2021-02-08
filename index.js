@@ -109,21 +109,17 @@ function toggleTask() {
     ul.onclick = function (event) {
         if (event.target.type != "checkbox") return;
         let li = event.target.closest('li');
-        if (!li) {
-            return;
-        } else {
-            let liId = li.id;
-            let check = event.target.checked;
-            let task = tasksList.find(item => item.id == liId);
+        if (!li) return;
+        let liId = li.id;
+        let check = event.target.checked;
+        let task = tasksList.find(item => item.id == liId);
             if (check) {
                 li.classList.add('completed');
                 task.completed = true;
-                console.log(liId);
             } else {
                 li.classList.remove('completed');
                 task.completed = false;
             };
-        };
     };
 };
 
