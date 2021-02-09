@@ -5,9 +5,9 @@ const task = {
 };
 const tasksList = [
     { id: "1", text: "выучить html", completed: true },
-    // { id: "2", text: "выучить css", completed: true },
-    // { id: "3", text: "выучить js", completed: false },
-    // { id: "4", text: "выучить фреймворк", completed: false },
+    { id: "2", text: "выучить css", completed: true },
+    { id: "3", text: "выучить js", completed: false },
+    { id: "4", text: "выучить фреймворк", completed: false },
     // { id: "5", text: "написать несколько учебных проектов", completed: false },
     // { id: "6", text: "пройти собеседование", completed: true },
     // { id: "7", text: "получить работу", completed: false }
@@ -116,12 +116,25 @@ function toggleTask() {
             if (check) {
                 li.classList.add('completed');
                 task.completed = true;
+                countActiveTasks()
             } else {
                 li.classList.remove('completed');
                 task.completed = false;
+                countActiveTasks()
             };
+    };
+};
+function countActiveTasks() {
+    let task = tasksList.filter(item => item.completed == false);
+    console.log(task.length);
+    let count = document.querySelector('.todo-count');
+    if(task.length == 1){
+        count.innerHTML = "<strong>" + task.length + "</strong> item left";
+    } else {
+        count.innerHTML = "<strong>" + task.length + "</strong> items left";
     };
 };
 
 renderTasks()
 toggleTask()
+countActiveTasks()
