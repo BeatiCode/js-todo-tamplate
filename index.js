@@ -84,6 +84,7 @@ function createNewTask() {
     };
     tasksList.push(task);
 };
+
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
     for (let i = 0; i < tasksList.length; i++) {
@@ -106,5 +107,18 @@ function toggleTask() {
                 li.classList.remove('completed');
                 task.completed = false;
             };
+    };
+};
+function deleteTask() {
+    const ul = document.querySelector('.todo-list');
+    ul.onclick = function (event) {
+        if (event.target.className != "destroy") return;
+        const li = event.target.closest('li');
+        const liId = li.id;
+        if (!li) return;
+        let task = tasksList.find(item => item.id == liId);
+        tasksList = tasksList.filter(t => t.id !== task.id);
+        li.remove();
+
     };
 };
