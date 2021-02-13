@@ -85,19 +85,6 @@ function createNewTask() {
     tasksList.push(task);
 };
 
-function deleteTask() {
-    const ul = document.querySelector('.todo-list');
-    ul.onclick = function (event) {
-        if (event.target.className != "destroy") return;
-        const li = event.target.closest('li');
-        const liId = li.id;
-        if (!li) return;
-        let task = tasksList.find(item => item.id == liId);
-        tasksList = tasksList.filter(t => t.id !== task.id);
-        li.remove();
-    };
-};
-
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
     for (let i = 0; i < tasksList.length; i++) {
@@ -134,7 +121,17 @@ function countActiveTasks() {
         count.innerHTML = "<strong>" + task.length + "</strong> items left";
     };
 };
+function deleteTask() {
+    const ul = document.querySelector('.todo-list');
+    ul.onclick = function (event) {
+        if (event.target.className != "destroy") return;
+        const li = event.target.closest('li');
+        const liId = li.id;
+        if (!li) return;
+        let task = tasksList.find(item => item.id == liId);
+        tasksList = tasksList.filter(t => t.id !== task.id);
+        li.remove();
 
-renderTasks()
-toggleTask()
-countActiveTasks()
+    };
+};
+
