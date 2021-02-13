@@ -4,7 +4,7 @@ const task = {
     completed: true
 };
 let tasksList = [
-    { id: "1", text: "выучить html", completed: false },
+    { id: "1", text: "выучить html", completed: true },
     { id: "2", text: "выучить css", completed: false },
     { id: "3", text: "выучить js", completed: false },
     { id: "4", text: "выучить фреймворк", completed: false },
@@ -114,18 +114,21 @@ function toggleTask() {
         if (check) {
             li.classList.add('completed');
             task.completed = true;
-            countActiveTasks()
-            deleteCompleteTask()
+            countActiveTasks();
+            deleteCompleteTask();
+            checkClearCompleted()
         } else {
             li.classList.remove('completed');
             task.completed = false;
             countActiveTasks()
+            checkClearCompleted()
         };
     };
 };
 function countActiveTasks() {
     let task = tasksList.filter(item => item.completed == false);
     let count = document.querySelector('.todo-count');
+    count.style.display = "block";
     if (task.length == 1) {
         count.innerHTML = "<strong>" + task.length + "</strong> item left";
     } else {
@@ -140,10 +143,14 @@ function deleteCompleteTask() {
             liComplete[i].remove();
         };
         tasksList = tasksList.filter(t => t.completed !== true);
-        console.log(tasksList);
     };
 };
-deleteCompleteTask()
-renderTasks()
-toggleTask()
-
+function checkClearCompleted() {
+    const clearButton = document.querySelector('.clear-completed');
+    let task = tasksList.filter(item => item.completed == true);
+    if (task.length == 0) {
+        clearButton.style.display = "none";
+    } else {
+        clearButton.style.display = "block";
+    };   
+};
