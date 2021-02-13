@@ -96,7 +96,6 @@ function deleteTask() {
         li.remove();
     };
 };
-
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
     for (let i = 0; i < tasksList.length; i++) {
@@ -147,5 +146,4 @@ function deleteCompleteTask() {
 deleteCompleteTask()
 renderTasks()
 toggleTask()
-
 
