@@ -3,11 +3,11 @@ const task = {
     text: "выучить html",
     completed: true
 };
-const tasksList = [
-    { id: "1", text: "выучить html", completed: true },
-    // { id: "2", text: "выучить css", completed: true },
-    // { id: "3", text: "выучить js", completed: false },
-    // { id: "4", text: "выучить фреймворк", completed: false },
+let tasksList = [
+    { id: "1", text: "выучить html", completed: false },
+    { id: "2", text: "выучить css", completed: false },
+    { id: "3", text: "выучить js", completed: false },
+    { id: "4", text: "выучить фреймворк", completed: false },
     // { id: "5", text: "написать несколько учебных проектов", completed: false },
     // { id: "6", text: "пройти собеседование", completed: true },
     // { id: "7", text: "получить работу", completed: false }
@@ -84,7 +84,18 @@ function createNewTask() {
     };
     tasksList.push(task);
 };
-
+function deleteTask() {
+    const ul = document.querySelector('.todo-list');
+    ul.onclick = function (event) {
+        if (event.target.className != "destroy") return;
+        const li = event.target.closest('li');
+        const liId = li.id;
+        if (!li) return;
+        let task = tasksList.find(item => item.id == liId);
+        tasksList = tasksList.filter(t => t.id !== task.id);
+        li.remove();
+    };
+};
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
     for (let i = 0; i < tasksList.length; i++) {
@@ -100,25 +111,39 @@ function toggleTask() {
         let liId = li.id;
         let check = event.target.checked;
         let task = tasksList.find(item => item.id == liId);
-            if (check) {
-                li.classList.add('completed');
-                task.completed = true;
-            } else {
-                li.classList.remove('completed');
-                task.completed = false;
-            };
+        if (check) {
+            li.classList.add('completed');
+            task.completed = true;
+            countActiveTasks()
+            deleteCompleteTask()
+        } else {
+            li.classList.remove('completed');
+            task.completed = false;
+            countActiveTasks()
+        };
     };
 };
-function deleteTask() {
-    const ul = document.querySelector('.todo-list');
-    ul.onclick = function (event) {
-        if (event.target.className != "destroy") return;
-        const li = event.target.closest('li');
-        const liId = li.id;
-        if (!li) return;
-        let task = tasksList.find(item => item.id == liId);
-        tasksList = tasksList.filter(t => t.id !== task.id);
-        li.remove();
+function countActiveTasks() {
+    let task = tasksList.filter(item => item.completed == false);
+    let count = document.querySelector('.todo-count');
+    if (task.length == 1) {
+        count.innerHTML = "<strong>" + task.length + "</strong> item left";
+    } else {
+        count.innerHTML = "<strong>" + task.length + "</strong> items left";
+    };
+};
+function deleteCompleteTask() {
+    const clearButton = document.querySelector('.clear-completed');
+    const liComplete = document.querySelectorAll('.completed');
+    clearButton.onclick = function () {
+        for (let i = 0; i < liComplete.length; i++) {
+            liComplete[i].remove();
+        };
+        tasksList = tasksList.filter(t => t.completed !== true);
+        console.log(tasksList);
+    };
+};
+deleteCompleteTask()
+renderTasks()
+toggleTask()
 
-    };
-};
