@@ -148,7 +148,7 @@ function checkClearCompleted() {
         clearButton.style.display = "block";
     };
 };
-createNewTask()
+// createNewTask()
 deleteTask()
 toggleTask()
 checkClearCompleted() 
