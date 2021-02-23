@@ -4,13 +4,13 @@ const task = {
     completed: true
 };
 let tasksList = [
-    // { id: "1", text: "выучить html", completed: true },
+    // { id: "1", text: "выучить html", completed: false },
     // { id: "2", text: "выучить css", completed: false },
     // { id: "3", text: "выучить js", completed: false },
     // { id: "4", text: "выучить фреймворк", completed: false },
-    // // { id: "5", text: "написать несколько учебных проектов", completed: false },
-    // // { id: "6", text: "пройти собеседование", completed: true },
-    // // { id: "7", text: "получить работу", completed: false }
+    // { id: "5", text: "написать несколько учебных проектов", completed: false },
+    // { id: "6", text: "пройти собеседование", completed: true },
+    // { id: "7", text: "получить работу", completed: false }
 ];
 // Создание вложенности эллементов
 
@@ -40,18 +40,20 @@ function createListItem() {
 // массив задач
 function renderTasks() {
     const ul = document.querySelector('.todo-list');
-    const li = createListItem();
-    ul.append(li);
-    const input = document.querySelectorAll('.toggle');
+    const li = document.querySelector('.todo-list').children;
+    // tasksList.forEach( function(i) {
+    //     ul.append(createListItem(i));
+    // });
+    ul.append(createListItem());
     const label = document.querySelectorAll('.todo-list li label');
+    const input = document.querySelectorAll('.toggle');
     for (let i = 0; i < tasksList.length; i++) {
-        li.id = tasksList[i].id
-        label[i].innerHTML = tasksList[i].text;
+        li[i].id = tasksList[i].id;
         input[i].checked = tasksList[i].completed;
+        label[i].innerHTML = tasksList[i].text;
     };
-    console.log(ul);
 };
-function getid(arr) {
+function getId(arr) {
     if (arr.length > 0) {
         return arr[arr.length - 1]['id'];
     } else {
@@ -63,7 +65,7 @@ function createNewTask() {
     inputValueTask.addEventListener('keydown', function (inter) {
         if (inter.keyCode == 13) {
             if(inputValueTask.value.length == 0) return;
-            let id = getid(tasksList);
+            let id = getId(tasksList);
             id++;
             const task = {
                 id: "" + id,
