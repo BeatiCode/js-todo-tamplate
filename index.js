@@ -150,10 +150,38 @@ function checkClearCompleted() {
         clearButton.style.display = "block";
     };
 };
-// createNewTask()
+function filterTask() {
+    const ulFilter = document.querySelector('.filters');
+    
+    ulFilter.addEventListener('click', function(event){
+        if(!event.target.getAttribute('href')) return;
+        let ul = event.target.closest('ul');
+        switch(event.target.getAttribute('href')) {
+            case '#/':
+                renderTasks()
+                console.log(ul);
+                break;
+            case '#/active':
+                const liComplete = document.querySelectorAll('.completed');
+                event.target.classList.add('selected');
+                console.log(event.target);
+                break;
+            case '#/completed':
+
+                event.target.classList.add('selected');
+                console.log(event.target);
+                break;
+        }
+        return;
+    });
+    console.log(ulFilter);
+    console.log(tasksList);
+};
+createNewTask()
+// renderTasks()
 deleteTask()
 toggleTask()
 checkClearCompleted() 
 deleteCompleteTask()
 countActiveTasks()
-
+filterTask()
