@@ -5,12 +5,12 @@ const task = {
 };
 let tasksList = [
     { id: "1", text: "выучить html", completed: false },
-    { id: "2", text: "выучить css", completed: false },
-    { id: "3", text: "выучить js", completed: false },
-    { id: "4", text: "выучить фреймворк", completed: false },
-    { id: "5", text: "написать несколько учебных проектов", completed: false },
-    { id: "6", text: "пройти собеседование", completed: true },
-    { id: "7", text: "получить работу", completed: false }
+    // { id: "2", text: "выучить css", completed: false },
+    // { id: "3", text: "выучить js", completed: false },
+    // { id: "4", text: "выучить фреймворк", completed: false },
+    // { id: "5", text: "написать несколько учебных проектов", completed: false },
+    // { id: "6", text: "пройти собеседование", completed: true },
+    // { id: "7", text: "получить работу", completed: false }
 ];
 // Создание вложенности эллементов
 
@@ -92,6 +92,8 @@ function deleteTask() {
             li.remove();
             let task = tasksList.find(item => item.id == liId);
             tasksList = tasksList.filter(t => t.id !== task.id);
+            countActiveTasks();
+            checkClearCompleted();
         };
 
     });
@@ -156,29 +158,23 @@ function checkClearCompleted() {
 };
 function filterTask() {
     const ulFilter = document.querySelector('.filters');
-    
     ulFilter.addEventListener('click', function(event){
         if(!event.target.getAttribute('href')) return;
-        let ul = event.target.closest('ul');
         switch(event.target.getAttribute('href')) {
             case '#/':
-                renderTasks()
-                console.log(ul);
+                renderTasks();
                 break;
             case '#/active':
-                const liComplete = document.querySelectorAll('.completed');
                 event.target.classList.add('selected');
-                console.log(event.target);
                 break;
             case '#/completed':
-
-                event.target.classList.add('selected');
-                console.log(event.target);
+                // event.target.classList.add('selected');
                 break;
         }
     });
-    console.log(ulFilter);
-    console.log(tasksList);
 };
-renderTasks()
 createNewTask()
+deleteTask()
+toggleTask()
+checkClearCompleted()
+filterTask()
