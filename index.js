@@ -4,7 +4,7 @@ const task = {
     completed: true
 };
 let tasksList = [
-    { id: "1", text: "выучить html", completed: false },
+    // { id: "1", text: "выучить html", completed: false },
     // { id: "2", text: "выучить css", completed: false },
     // { id: "3", text: "выучить js", completed: false },
     // { id: "4", text: "выучить фреймворк", completed: false },
@@ -177,4 +177,4 @@ createNewTask()
 deleteTask()
 toggleTask()
 checkClearCompleted()
-filterTask()
+// filterTask()
