@@ -41,10 +41,9 @@ function createListItem() {
 function renderTasks() {
     const ul = document.querySelector('.todo-list');
     const li = ul.children;
-    tasksList.forEach( function(i) {
+    tasksList.forEach(function (i) {
         ul.append(createListItem(i));
     });
-    // ul.append(createListItem());
     const label = document.querySelectorAll('.todo-list li label');
     const input = document.querySelectorAll('.toggle');
     for (let i = 0; i < tasksList.length; i++) {
@@ -64,7 +63,7 @@ function createNewTask() {
     let inputValueTask = document.querySelector('.new-todo');
     inputValueTask.addEventListener('keydown', function (enter) {
         if (enter.keyCode == 13) {
-            if(inputValueTask.value.length == 0) return;
+            if (inputValueTask.value.length == 0) return;
             let id = getId(tasksList);
             id++;
             const task = {
@@ -85,7 +84,7 @@ function createNewTask() {
 };
 function deleteTask() {
     const ul = document.querySelector('.todo-list');
-    ul.addEventListener('click', function(event) {
+    ul.addEventListener('click', function (event) {
         if (event.target.className == "destroy") {
             const li = event.target.closest('li');
             const liId = li.id;
@@ -106,9 +105,10 @@ function toggleTask() {
             li.classList.add('completed');
         };
     };
-    ul.addEventListener('click', function(event) {
+    ul.addEventListener('click', function (event) {
         if (event.target.type != "checkbox") return;
         let li = event.target.closest('li');
+        filterTask()
         if (!li) return;
         let liId = li.id;
         let check = event.target.checked;
@@ -157,24 +157,32 @@ function checkClearCompleted() {
     };
 };
 function filterTask() {
+    let ul = document.querySelector('.todo-list');
+    let li = ul.children;
     const ulFilter = document.querySelector('.filters');
-    ulFilter.addEventListener('click', function(event){
-        if(!event.target.getAttribute('href')) return;
-        switch(event.target.getAttribute('href')) {
+    ulFilter.addEventListener('click', function (event) {
+        if (!event.target.getAttribute('href')) return;
+        let selected = document.querySelectorAll('.selected');
+        switch (event.target.getAttribute('href')) {
             case '#/':
-                renderTasks();
-                break;
+                if (event.target.classList == 'selected') return;
             case '#/active':
-                event.target.classList.add('selected');
-                break;
+                if (event.target.classList == 'selected') return;
+                const liComplete = document.querySelectorAll('.completed');
+                for (let i = 0; i < liComplete.length; i++) {
+                    liComplete[i].remove();
+                };
             case '#/completed':
-                // event.target.classList.add('selected');
+                if (event.target.classList == 'selected') return;
+                event.target.classList.add('selected');
+                selected[0].classList.remove('selected');
                 break;
-        }
+        };
     });
 };
+// renderTasks()
 createNewTask()
 deleteTask()
 toggleTask()
 checkClearCompleted()
-// filterTask()
+filterTask()
