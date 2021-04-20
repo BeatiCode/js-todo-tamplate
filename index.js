@@ -1,7 +1,7 @@
 const task = {
-    id: "1",
-    text: "выучить html",
-    completed: true
+    // id: "1",
+    // text: "выучить html",
+    // completed: true
 };
 let tasksList = [
     // { id: "1", text: "выучить html", completed: false },
