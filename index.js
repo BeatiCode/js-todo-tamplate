@@ -211,7 +211,6 @@ function checkFooter() {
     } else {
         footer.style.display = "block";
     };
-
 };
 // renderTasks()
 createNewTask()
