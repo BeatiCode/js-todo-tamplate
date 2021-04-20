@@ -78,6 +78,7 @@ function createNewTask() {
             document.querySelector('ul > li:last-child > div > Label').innerHTML = task.text;
             document.querySelector('ul > li:last-child > div > input').checked = task.completed;
             countActiveTasks()
+            checkFooter();
             inputValueTask.value = "";
         };
     });
@@ -93,6 +94,7 @@ function deleteTask() {
             tasksList = tasksList.filter(t => t.id !== task.id);
             countActiveTasks();
             checkClearCompleted();
+            checkFooter();
         };
 
     });
@@ -146,6 +148,7 @@ function deleteCompleteTask() {
         };
         tasksList = tasksList.filter(t => t.completed !== true);
         checkClearCompleted()
+        checkFooter()
     };
 };
 function checkClearCompleted() {
@@ -168,43 +171,52 @@ function filterTask() {
                 event.target.classList.add('selected');
                 selected[0].classList.remove('selected');
                 const taskLi = document.querySelectorAll('.todo-list > li');
-                for (const task of taskLi){
+                for (const task of taskLi) {
                     task.style.display = "block";
-                }
+                };
                 break;
             case '#/active':
                 if (event.target.classList == 'selected') return;
                 event.target.classList.add('selected');
                 selected[0].classList.remove('selected');
                 const active = document.querySelectorAll('.todo-list > li');
-                for (const task of active){
+                for (const task of active) {
                     task.style.display = "block";
-                }
+                };
                 const taskCompleted = document.querySelectorAll('.todo-list .completed');
-                for (const task of taskCompleted){
+                for (const task of taskCompleted) {
                     task.style.display = "none";
-                }
+                };
                 break;
             case '#/completed':
                 if (event.target.classList == 'selected') return;
-              
                 const notCompleted = document.querySelectorAll('.todo-list > li');
-                for (const task of notCompleted){
+                for (const task of notCompleted) {
                     task.style.display = "none";
-                }
+                };
                 const completed = document.querySelectorAll('.todo-list .completed');
-                for(const task of completed) {
+                for (const task of completed) {
                     task.style.display = "block";
-                }
+                };
                 event.target.classList.add('selected');
                 selected[0].classList.remove('selected');
                 break;
         };
     });
 };
+function checkFooter() {
+    const footer = document.querySelector('footer');
+    if (tasksList.length == 0) {
+        footer.style.display = "none";
+    } else {
+        footer.style.display = "block";
+    };
+
+};
 // renderTasks()
 createNewTask()
 deleteTask()
 toggleTask()
 checkClearCompleted()
+checkFooter()
 filterTask()
