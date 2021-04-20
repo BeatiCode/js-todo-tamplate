@@ -145,6 +145,7 @@ function deleteCompleteTask() {
             liComplete[i].remove();
         };
         tasksList = tasksList.filter(t => t.completed !== true);
+        checkClearCompleted()
     };
 };
 function checkClearCompleted() {
