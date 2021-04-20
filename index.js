@@ -157,8 +157,6 @@ function checkClearCompleted() {
     };
 };
 function filterTask() {
-    let ul = document.querySelector('.todo-list');
-    let li = ul.children;
     const ulFilter = document.querySelector('.filters');
     ulFilter.addEventListener('click', function (event) {
         if (!event.target.getAttribute('href')) return;
@@ -166,14 +164,37 @@ function filterTask() {
         switch (event.target.getAttribute('href')) {
             case '#/':
                 if (event.target.classList == 'selected') return;
+                event.target.classList.add('selected');
+                selected[0].classList.remove('selected');
+                const taskLi = document.querySelectorAll('.todo-list > li');
+                for (const task of taskLi){
+                    task.style.display = "block";
+                }
+                break;
             case '#/active':
                 if (event.target.classList == 'selected') return;
-                const liComplete = document.querySelectorAll('.completed');
-                for (let i = 0; i < liComplete.length; i++) {
-                    liComplete[i].remove();
-                };
+                event.target.classList.add('selected');
+                selected[0].classList.remove('selected');
+                const active = document.querySelectorAll('.todo-list > li');
+                for (const task of active){
+                    task.style.display = "block";
+                }
+                const taskCompleted = document.querySelectorAll('.todo-list .completed');
+                for (const task of taskCompleted){
+                    task.style.display = "none";
+                }
+                break;
             case '#/completed':
                 if (event.target.classList == 'selected') return;
+              
+                const notCompleted = document.querySelectorAll('.todo-list > li');
+                for (const task of notCompleted){
+                    task.style.display = "none";
+                }
+                const completed = document.querySelectorAll('.todo-list .completed');
+                for(const task of completed) {
+                    task.style.display = "block";
+                }
                 event.target.classList.add('selected');
                 selected[0].classList.remove('selected');
                 break;
