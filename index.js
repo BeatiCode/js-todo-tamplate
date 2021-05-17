@@ -1,4 +1,4 @@
-const task = {
+let task = {
     // id: "1",
     // text: "выучить html",
     // completed: true
@@ -71,14 +71,18 @@ function createNewTask() {
                 text: inputValueTask.value,
                 completed: false
             };
+            // task.id = +id;
+            // task.id = inputValueTask.value;
+            // task.completed = false;
             tasksList.push(task);
             const ul = document.querySelector('.todo-list');
             ul.append(createListItem());
             ul.lastChild.id = id;
             document.querySelector('ul > li:last-child > div > Label').innerHTML = task.text;
             document.querySelector('ul > li:last-child > div > input').checked = task.completed;
-            countActiveTasks()
+            countActiveTasks();
             checkFooter();
+            updateLocalStorage();
             inputValueTask.value = "";
         };
     });
@@ -149,6 +153,7 @@ function deleteCompleteTask() {
         tasksList = tasksList.filter(t => t.completed !== true);
         checkClearCompleted()
         checkFooter()
+        updateLocalStorage()
     };
 };
 function checkClearCompleted() {
@@ -159,6 +164,7 @@ function checkClearCompleted() {
     } else {
         clearButton.style.display = "block";
     };
+    updateLocalStorage()
 };
 function filterTask() {
     const ulFilter = document.querySelector('.filters');
@@ -212,7 +218,17 @@ function checkFooter() {
         footer.style.display = "block";
     };
 };
-// renderTasks()
+function updateLocalStorage() {
+    let stringify = JSON.stringify(tasksList);
+    localStorage.setItem('taskList', stringify);
+}
+function getLocalStorage() {    
+    let jsonParseTasks = JSON.parse(localStorage.getItem('taskList'));
+    tasksList = jsonParseTasks;
+}
+
+getLocalStorage()
+renderTasks()
 createNewTask()
 deleteTask()
 toggleTask()
