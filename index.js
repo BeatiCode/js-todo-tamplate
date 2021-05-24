@@ -1,17 +1,6 @@
-let task = {
-    // id: "1",
-    // text: "выучить html",
-    // completed: true
-};
-let tasksList = [
-    // { id: "1", text: "выучить html", completed: false },
-    // { id: "2", text: "выучить css", completed: false },
-    // { id: "3", text: "выучить js", completed: false },
-    // { id: "4", text: "выучить фреймворк", completed: false },
-    // { id: "5", text: "написать несколько учебных проектов", completed: false },
-    // { id: "6", text: "пройти собеседование", completed: true },
-    // { id: "7", text: "получить работу", completed: false }
-];
+let task = {};
+let tasksList = [];
+
 // Создание вложенности эллементов
 
 function createListItem() {
@@ -37,7 +26,9 @@ function createListItem() {
     return li;
 
 };
+
 // массив задач
+
 function renderTasks() {
     const ul = document.querySelector('.todo-list');
     const li = ul.children;
@@ -104,7 +95,7 @@ function deleteTask() {
 function toggleTask() {
     const ul = document.querySelector('.todo-list');
     for (let i = 0; i < tasksList.length; i++) {
-        if (tasksList[i].completed == true) {
+        if (tasksList[i].completed) {
             const li = ul.children[i];
             li.classList.add('completed');
         };
@@ -122,14 +113,15 @@ function toggleTask() {
             task.completed = true;
             countActiveTasks();
             deleteCompleteTask();
-            checkClearCompleted()
-            checkFilter()
+            checkClearCompleted();
+            checkFilter();
         } else {
             li.classList.remove('completed');
             task.completed = false;
-            countActiveTasks()
-            checkClearCompleted()
-            checkFilter()
+            countActiveTasks();
+            deleteCompleteTask();
+            checkClearCompleted();
+            checkFilter();
         };
     });
 };
@@ -169,7 +161,6 @@ function checkClearCompleted() {
 function filterTask() {
     const ulFilter = document.querySelector('.filters');
     ulFilter.addEventListener('click', function (event) {
-        // if (!event.target.getAttribute('href')) return;
         let filter = event.target;
         switch (filter.getAttribute('href')) {
             case '#/':
@@ -183,6 +174,26 @@ function filterTask() {
                 break;
         };
     });
+};
+function allCheckLabel() {
+    const toggleAll = document.querySelectorAll('.toggle');
+    for (let i = 0; i < toggleAll.length; i++) {
+        toggleAll[i].checked = !toggleAll[i].checked;
+    };
+    const ul = document.querySelector('.todo-list');
+    const li = ul.children;
+    for (let i = 0; i < tasksList.length; i++) {
+        if (toggleAll[i].checked){
+            li[i].classList.add('completed');
+            tasksList[i].completed = true;
+        } else {
+            li[i].classList.remove('completed');
+            tasksList[i].completed = false;
+        };
+    };
+    deleteCompleteTask()
+    checkClearCompleted()
+    countActiveTasks()
 };
 
 function filterAll(filter) {
@@ -236,6 +247,7 @@ function updateLocalStorage() {
 function getLocalStorage() {
     let jsonParseTasks = JSON.parse(localStorage.getItem('taskList'));
     if (jsonParseTasks) tasksList = jsonParseTasks;
+    countActiveTasks();
 };
 
 function checkFilter() {
