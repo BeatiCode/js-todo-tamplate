@@ -261,6 +261,7 @@ function checkFilter() {
         filterComplete(filter[0])
     };
 };
+
 getLocalStorage()
 renderTasks()
 createNewTask()
