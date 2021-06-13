@@ -33,20 +33,25 @@ function toggleTask() {
 };
 function allCheckLabel() {
     const toggleAll = document.querySelectorAll('.toggle');
-    for (let i = 0; i < toggleAll.length; i++) {
-        toggleAll[i].checked = !toggleAll[i].checked;
-    };
     const ul = document.querySelector('.todo-list');
     const li = ul.children;
-    for (let i = 0; i < tasksList.length; i++) {
-        if (toggleAll[i].checked){
-            li[i].classList.add('completed');
-            tasksList[i].completed = true;
-        } else {
-            li[i].classList.remove('completed');
-            tasksList[i].completed = false;
-        };
+    for (let i = 0; i < toggleAll.length; i++) { 
+        console.log(toggleAll[i].checked)
+            
+            // return toggleAll[i].checked = true;
+        
+        // toggleAll[i].checked = !toggleAll[i].checked
+
     };
+    // for (let i = 0; i < tasksList.length; i++) {
+    //     if (toggleAll[i].checked){
+    //         li[i].classList.add('completed');
+    //         tasksList[i].completed = true;
+    //     } else {
+    //         li[i].classList.remove('completed');
+    //         tasksList[i].completed = false;
+    //     };
+    // };
     deleteCompleteTask()
     checkClearCompleted()
     countActiveTasks()
